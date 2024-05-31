@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qalbit Infotech Tracker</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' http://127.0.0.1:8000; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- <nav>
+        <ul>
+            <li><a href="#" id="dashboardLink">Dashboard</a></li>
+            <li><a href="#" id="settingsLink">Settings</a></li>
+        </ul>
+    </nav> -->
+   
+    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+        <div class="timer-controls">
+            <button id="playButton">Play</button>
+            <button id="pauseButton">Pause</button>
+            <button id="stopButton">Stop</button>
+        </div>
+        <div class="timer-display">
+            <span id="timerDisplay">00:00:00</span>
+        </div>
+        <div class="timer-display">
+            <span id="totalTimeDisplay">00:00:00</span><br/>
+            <span id="welcomeMessage"></span>
+        </div>
+    </div>
+    <div>
+        <table id="reportTable" border="1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Project Name</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+    <div class="form-container">
+        <form action="/action_page.php">
+            <label for="cars">Choose Project:</label>
+            <select name="cars" id="cars" required>
+                <option value=""  selected>Select</option>
+            </select>
+            <br><br>
+        </form>
+    </div>
+
+    <!-- login page  -->
+    
+    <!-- <div class='auth-main-container'>
+        <div class="auth-container">
+            <div class="login-form">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <input type="email" id="login-email" placeholder="Email" required>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </div> -->
+
+    <script src="renderer.js"></script>
+    
+</body>
+</html>

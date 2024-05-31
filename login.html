@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qalbit Infotech Tracker</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' http://127.0.0.1:8000; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class='auth-main-container'>
+        <div class="auth-container">
+            <div class="login-form">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <input type="email" id="login-email" placeholder="Email" required>
+                    <input type="password" id="login-password" placeholder="Password" required required onclick="togglePasswordVisibility()">
+                    <label>
+                        <input type="checkbox" id="remember-me"> Remember me
+                    </label>
+                    <button type="submit">Login</button>
+                </form>
+                <div id="error-messages" style="color: red;"></div> <!-- Add this div for error messages -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+        const axios = require('axios');
+
+        // function togglePasswordVisibility() {
+        //     const passwordInput = document.getElementById('login-password');
+        //     if (passwordInput.type === 'password') {
+        //         passwordInput.type = 'text';
+        //     } else {
+        //         passwordInput.type = 'password';
+        //     }
+        // }
+
+        document.addEventListener('DOMContentLoaded', (event)=>{
+            const rememberMeCheckbox = document.getElementById('remember-me');
+            const emailInput = document.getElementById('login-email');
+            const passwordInput = document.getElementById('login-password');
+
+            // Load saved email and password if "Remember Me" was checked previously
+            if (localStorage.getItem('rememberMe') === 'true') {
+                rememberMeCheckbox.checked = true;
+                emailInput.value = localStorage.getItem('email') || '';
+                passwordInput.value = localStorage.getItem('password') || '';
+            }
+
+        })
+        document.getElementById('login-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const rememberMeCheckbox = document.getElementById('remember-me');
+            
+
+            try {
+                const response = await axios.post('http://127.0.0.1:8000/api/login', {
+                    email: email,
+                    password: password
+                });
+
+                if (response.status === 200) {
+                    ipcRenderer.send('login-success', response.data);
+                    if (rememberMeCheckbox) {
+                        localStorage.setItem('email', email);
+                        localStorage.setItem('password', password);
+                        localStorage.setItem('rememberMe', 'true');
+                    } else {
+                        localStorage.removeItem('email');
+                        localStorage.removeItem('password');
+                        localStorage.setItem('rememberMe', 'false');
+                    }
+                } else {
+                    console.error('Unexpected response status:', response);
+                }
+            } catch (error) {
+                const errorMessagesDiv = document.getElementById('error-messages');
+                errorMessagesDiv.innerHTML = ''; // Clear previous errors
+
+                if (error.response) {
+                    console.error('Error response data:', error.response.data);
+
+                    if (error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        for (const key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                const errorMessage = errors[key];
+                                errorMessagesDiv.innerHTML += `<p>${errorMessage}</p>`;
+                            }
+                        }
+                    } else if (error.response.data.error) {
+                        errorMessagesDiv.innerHTML += `<p>${error.response.data.error}</p>`;
+                    }
+                } else if (error.request) {
+                    console.error('Error request:', error.request);
+                    errorMessagesDiv.innerHTML += '<p>Server did not respond. Please try again later.</p>';
+                } else {
+                    console.error('Error message:', error.message);
+                    errorMessagesDiv.innerHTML += `<p>${error.message}</p>`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

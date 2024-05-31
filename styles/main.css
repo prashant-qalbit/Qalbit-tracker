@@ -1,0 +1,246 @@
+/* Reset some basic styles */
+body, h4, button {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.form-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .form-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    select, input[type="submit"] {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+/* Page container */
+.page-title-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Title */
+.page-title-box h4 {
+    font-size: 1.5rem;
+    color: #343a40;
+    margin-bottom: 10px;
+}
+
+/* Timer controls */
+.timer-controls {
+    display: flex;
+    gap: 10px;
+}
+
+/* Timer buttons */
+#playButton {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#pauseButton {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color:black;
+    background-color: yellow;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#stopButton {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color:red;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.timer-controls button:hover {
+    background-color: #0056b3;
+}
+
+/* Timer display */
+.timer-display {
+    margin-left: auto;
+    margin-top: 10px;
+}
+
+#timerDisplay {
+    font-size: 2rem;
+    color: white;
+    background-color:blue;
+    border-radius: 5px;
+    
+}
+
+#totalTimeDisplay{
+    color:forestgreen;
+    background-color:#fff;
+    border-radius: 5px;
+}
+
+#welcomeMessage{
+    color:forestgreen;
+    background-color:#fff;
+    border-radius: 5px;
+}
+#reportTable{
+    display: none;
+}
+
+#error-messages{
+    text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .page-title-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .timer-controls {
+        margin-top: 10px;
+    }
+
+    .timer-display {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-title-box h4 {
+        font-size: 1.25rem;
+    }
+
+    .timer-controls button {
+        padding: 8px 16px;
+        font-size: 0.875rem;
+    }
+
+    #timerDisplay {
+        font-size: 1.5rem;
+    }
+}
+
+
+/* login form csss */
+.auth-main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+
+
+}
+.auth-container {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    padding: 40px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 600;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="email"],
+input[type="password"] {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff;
+}
+
+button[type="submit"] {
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
